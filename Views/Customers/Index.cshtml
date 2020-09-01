@@ -6,12 +6,13 @@
 
 
 <h2>Customer list</h2>
-<div style="float:right;display:inline-block;margin-top:20px">
+@*<div style="float:right;display:inline-block;margin-top:20px">
 
 
 
     @Html.ActionLink("New +", "New", "Customers", null, new { @class = "btn btn-success" })
 </div>
+
 
 
 
@@ -34,18 +35,19 @@
         <tr>
             @foreach (var customer in Model)
             {
-<tr>
+            <tr>
 
 
 
-    <td>@Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, null)</td>
-    <td>@customer.MembershipType.DiscountRate</td>
-    <td>@customer.DOB</td>
+                <td>@Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, null)</td>
+                <td>@customer.MembershipType.DiscountRate</td>
+                <td>@customer.DOB</td>
 
 
 
 
-</tr>}
+            </tr>
+}
 
 
 
@@ -53,5 +55,60 @@
 
 
 
-    </table>
+    </table>*@
 
+
+
+
+    @if (!Model.Any())
+    {
+
+    }
+    else
+    {
+<div style="display:inline-block"><h2>Customer list</h2></div>
+                <div style="float:right;display:inline-block;margin-top:20px">
+
+                    @Html.ActionLink(" Add New Customer ", "New", "Customers", null, new { @class = "btn btn-success" })
+                </div>
+
+                                <div>
+
+
+                                    <table class="table table-bordered table-condensed table-striped">
+                                        <thead>
+                                            <tr>
+                                                <td>Customer Name</td>
+                                                <td>Discount Rate</td>
+                                                <td>Customer DOB</td>
+
+
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                  @foreach (var customer in Model)
+                   {
+                                            <tr>
+
+                                                <td>@Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, null)</td>
+                                                <td>@customer.MembershipType.DiscountRate%</td>
+                                                <td>@customer.DOB</td>
+
+                                                <td>
+                                                    @Html.ActionLink("Edit", "Edit", "Customers", new { id = customer.Id }, new { @class = "btn btn-success" })
+                                                </td>
+
+                                                <td>
+                                                    @Html.ActionLink("Delete", "Delete","Customers", new { id = customer.Id }, new { @class = "btn btn-primary" })
+                                                </td>
+                                            </tr>               
+                   }
+
+                                         </tbody>
+
+                                    </table>
+
+                                 </div>
+    }
